@@ -1,11 +1,11 @@
 #!usr/bin/env python
-__author__ = 'Dashiell Koester and Joey Weng'
-''' MP3 for CS440/ECE448 at UIUC: Perceptron Implementation'''
+__author__ = 'Dashiell Koester'
+''' Implementation of a Perceptron class trained to recognize one digit'''
 
 from sklearn.metrics import confusion_matrix
 from matplotlib import pyplot as plt
 import numpy as np
-# np.set_printoptions(threshold=np.nan)
+
 
 class Perceptron:
   
@@ -16,6 +16,7 @@ class Perceptron:
     
     
   def train(self, image_data, eta, epochs):
+    # account for bias node
     training_images = image_data.images
     training_image_labels = image_data.labels
      
@@ -64,7 +65,7 @@ def predict(perceptrons, images):
   # run through all the test images
   for i, test_image in enumerate(images):
     classification = -1
-    best_confidence = -100000
+    best_confidence = float('-inf')
 
     # find the best guess for each test image
     for j in xrange(10):
@@ -77,7 +78,7 @@ def predict(perceptrons, images):
   return classifications
 
 
-def run_perceptron_test(training_image_data, test_image_data):
+def run(training_image_data, test_image_data):
 
   # create the perceptrons
   perceptrons = []
